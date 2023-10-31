@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Verificador de Força de Senha</h1>
+    <input type="password" id="idSenha" placeholder="Digite a senha" onkeyup="verificarForca()">
+    
+    <output id="idOut"></output>
+
+    <script>
+        function verificarForca() {
+            var senha = document.getElementById("idSenha").value
+            var saida = document.getElementById("idOut")
+            var forca = 0
+
+            // Verifica o tamanho da string e pontua conforme o tamanho
+            if (senha.length >= 14) {
+                forca += 5;
+            } else if (senha.length >= 12) {
+                forca += 4;
+            } else if (senha.length >= 10) {
+                forca += 3;
+            } else if (senha.length >= 6) {
+                forca += 2;
+            } else if (senha.length >= 1) {
+                forca += 1;
+            }
+
+            // Verificar se a senha possui pelo menos um número e aumentar a pontuação se sim
+            qtd_numeros = 0
+            for (let i = 0; i < senha.length; i++) {
+                if (!isNaN(parseInt(senha[i]))) {
+                    qtd_numeros += 1
+                }
+            }
+            if (qtd_numeros >= 1) {
+                forca += 1
+            }
+
+            // Verificar se a senha possui pelo menos um caractere maiusculo e aumentar a pontuação se sim
+            qtd_maiusculo = 0
+            for (let i = 0; i < senha.length; i++) {
+                if (senha[i].match(/[A-Z]/)) {
+                    qtd_maiusculo += 1
+                }
+            }
+            if (qtd_maiusculo >= 1) {
+                forca += 1
+            }
+
+            // Verificar se a senha possui pelo menos um caractere minusculo e aumentar a pontuação se sim
+            qtd_minusculo = 0
+            for (let i = 0; i < senha.length; i++) {
+                if (senha[i].match(/[a-z]/)) {
+                    qtd_minusculo += 1
+                }
+            }
+            if (qtd_minusculo >= 1) {
+                forca += 1
+            }
+
+            // Verificar se a senha possui pelo menos um caractere especial e aumentar a pontuação se sim
+            qtd_especial = 0
+            for (let i = 0; i < senha.length; i++) {
+                if (senha[i].match(/\W|_/)) {
+                    qtd_especial += 1
+                }
+            }
+            if (qtd_especial >= 1) {
+                forca += 2
+            }
+
+            // Primeiro verifica se já foi digitado e depois atualiza o status de força da senha
+            if (senha != "" || senha != " ") {
+                if (forca >= 9) {
+                    saida.value = "Forte"
+                } else if (forca > 5) {
+                    saida.value = "Moderada"
+                } else if (forca <= 5) {
+                    saida.value = "Fraca"
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
