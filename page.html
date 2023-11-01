@@ -4,19 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Verificador de Força de Senha</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" media="">
 </head>
 
 <body>
-    <h1>Verificador de Força de Senha</h1>
-    <input type="password" id="idSenha" placeholder="Digite a senha" onkeyup="verificarForca()">
-    
-    <output id="idOut"></output>
+    <div class="area">
+        <h1>Verificador de Força de Senha</h1>
+        
+        <div class="input">
+            <input type="password" id="idSenha" placeholder="Digite uma senha" onkeyup="verificarForca()">
+        </div>
+        <div id="idOut"></div> 
+    </div>
 
     <script>
         function verificarForca() {
             var senha = document.getElementById("idSenha").value
-            var saida = document.getElementById("idOut")
             var forca = 0
 
             // Verifica o tamanho da string e pontua conforme o tamanho
@@ -79,11 +83,11 @@
             // Primeiro verifica se já foi digitado e depois atualiza o status de força da senha
             if (senha != "" || senha != " ") {
                 if (forca >= 9) {
-                    saida.value = "Forte"
+                    document.getElementById("idOut").innerHTML = "<span style='color: #00ff00'>Forte</span>";
                 } else if (forca > 5) {
-                    saida.value = "Moderada"
+                    document.getElementById("idOut").innerHTML = "<span style='color: #fffb00'>Moderada</span>";
                 } else if (forca <= 5) {
-                    saida.value = "Fraca"
+                    document.getElementById("idOut").innerHTML = "<span style='color: #ff0000'>Fraca</span>";
                 }
             }
         }
