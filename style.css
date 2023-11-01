@@ -19,7 +19,7 @@ h1{
     color: #ffffff;
 }
 
-.area {
+.container {
     overflow: hidden;
     width: 400px;
     margin: 100px auto;
@@ -51,4 +51,8 @@ input{
     outline: none;
     padding: 8px;
     color: ffffff;
+}
+
+.form-group{
+    margin-bottom: 0;
 }
